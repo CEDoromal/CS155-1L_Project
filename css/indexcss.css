@@ -1,0 +1,153 @@
+/* Center dimension: 1400x700 */
+
+.sliderbody{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slider{
+  max-width: 4000px;
+  width: 100%;
+  height: 900px;
+  border-radius: 0px; /*curved edge for image*/
+  overflow: hidden;
+  object-fit: contain;
+}
+
+.slides{
+  width: 500%;
+  height: 900px;
+  display: flex;
+}
+
+.slides input{
+  display: none;
+}
+
+.slide{
+  width: 20%;
+  transition: 2s;
+}
+
+.slide img{
+  max-width: 4000px;
+  max-height: 4000px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-me-index{
+  height: 400px;
+  background-color: #1e325c;
+}
+
+/*.contact-index{
+  height: 200px;
+  width: auto;
+  background-color: #fff;
+}*/
+
+.welcome-admin{
+  text-align: center;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif, Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.lg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/*css for manual slide navigation*/
+
+.navigation-manual{
+  position: absolute;
+  max-width: 4000px;
+  width: 100%;
+  margin-top: -40px;
+  display: flex;
+  justify-content: center;
+}
+
+.manual-btn{
+  border: 2px solid #384A9A;
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.manual-btn:not(:last-child){
+  margin-right: 40px;
+}
+
+.manual-btn:hover{
+  background: #384A9A;
+}
+
+#radio1:checked ~ .first{
+  margin-left: 0;
+}
+
+#radio2:checked ~ .first{
+  margin-left: -20%;
+}
+
+#radio3:checked ~ .first{
+  margin-left: -40%;
+}
+
+#radio4:checked ~ .first{
+  margin-left: -60%;
+}
+
+/*css for automatic nav*/
+
+.navigation-auto{
+  position: absolute;
+  display: flex;
+  max-width: 4000px;
+  width: 100%;
+  justify-content: center;
+  margin-top: 860px;
+}
+
+.navigation-auto div{
+  border: 2px solid #384A9A;
+  padding: 5px;
+  border-radius: 10px;
+  transition: 0.5s;
+}
+
+.navigation-auto div:not(:last-child){
+  margin-right: 40px;
+}
+
+#radio1:checked ~ .navigation-auto .auto-btn1{
+  background: #384A9A;
+}
+
+#radio2:checked ~ .navigation-auto .auto-btn2{
+  background: #384A9A;
+}
+
+#radio3:checked ~ .navigation-auto .auto-btn3{
+  background: #384A9A;
+}
+
+#radio4:checked ~ .navigation-auto .auto-btn4{
+  background: #384A9A;
+}
