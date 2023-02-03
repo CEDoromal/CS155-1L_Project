@@ -1,10 +1,10 @@
 <?php
 
-function component($productname,$productdesc, $productprice, $productimg, $productid){
+function component($productname,$productdesc, $productprice, $productimg, $productid, $returnLink){
     $element = "
     
     <div class=\"col-md-3 col-sm-6 my-3 my-md-0\">
-                <form action=\"products.php\" method=\"post\">
+                <form action=\"$returnLink\" method=\"post\">
                     <div class=\"card shadow\">
                         <div>
                             <img src=\"$productimg\" alt=\"Image1\" class=\"img-fluid card-img-top\">

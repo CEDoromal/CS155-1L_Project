@@ -16,7 +16,7 @@ if (isset($_POST['add'])){
 
         if(in_array($_POST['id'], $item_array_id)){
             echo "<script>alert('Product is already added in the cart..!')</script>";
-            echo "<script>window.location = '../views/products.php'</script>";
+            echo "<script>window.location = '../views/productsmonitor.php'</script>";
         }else{
 
             $count = count($_SESSION['shoppingCart']);
@@ -35,7 +35,7 @@ if (isset($_POST['add'])){
 
         // Create new session variable
         $_SESSION['shoppingCart'][0] = $item_array;
-        print_r($_SESSION['shoppingCart']);
+        //print_r($_SESSION['shoppingCart']);
     }
 }
 
@@ -68,7 +68,7 @@ if (isset($_POST['add'])){
             <?php
                 $result = $database->getDataMonitors();
                 while ($row = mysqli_fetch_assoc($result)){
-                    component($row['name'], $row['dsc'], $row['price'],$row['img'] ,$row['id']);
+                    component($row['name'], $row['dsc'], $row['price'],$row['img'] ,$row['id'], 'productsmonitor.php');
                 }
             ?>
         </div>

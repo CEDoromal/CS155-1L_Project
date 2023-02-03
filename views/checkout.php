@@ -125,6 +125,13 @@ $db = new CreateDb("mandatech", "products");
       $price = strval($total);
     
       createData($_SESSION['userID'], $_SESSION['username'], $_POST['badd'], $_POST['sadd'], $products, $price);
+
+      //bandage fix
+      echo '<script> alert("Order Recieved! Check your email for confirmation.") </script>';
+      unset($_SESSION['shoppingCart']);
+      //header("Location: ../index.php");
+      echo "<script>alert('Order Recieved! Check your email for confirmation.'); window.location = '../index.php'</script>";
+
     } elseif(isset($_SESSION['checkoutButton'])) {
       echo 'Error';
     }

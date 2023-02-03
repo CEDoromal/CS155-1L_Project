@@ -35,7 +35,7 @@ if (isset($_POST['add'])){
 
             // Create new session variable
             $_SESSION['shoppingCart'][0] = $item_array;
-            print_r($_SESSION['shoppingCart']);
+            //print_r($_SESSION['shoppingCart']);
         }
     } else {
         header("Location:login.php");
@@ -69,7 +69,7 @@ if (isset($_POST['add'])){
             <?php
                 $result = $database->getDataAllProducts();
                 while ($row = mysqli_fetch_assoc($result)){
-                    component($row['name'], $row['dsc'], $row['price'],$row['img'] ,$row['id']);
+                    component($row['name'], $row['dsc'], $row['price'],$row['img'] ,$row['id'], 'products.php');
                 }
             ?>
         </div>
