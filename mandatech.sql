@@ -1,6 +1,6 @@
 drop schema if exists mandatech;
 create schema mandatech;
-use mandatech;
+use mandatech; 
 
 
 

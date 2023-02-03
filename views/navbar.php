@@ -203,7 +203,7 @@ function getNavBar() {
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="mr-auto"></div>
                 <div class="navbar-nav">
-                    <a href="../mandatech/views/cart.php" class="nav-item nav-link active">
+                    <a href="cart.php" class="nav-item nav-link active">
                         <h5 class="px-5 cart">
                             <i class="fas fa-shopping-cart"></i> Cart
                             

@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
     $role = '2';
 
 	if ($password == $cpassword) {
-		$sql = "SELECT * FROM users WHERE email='$email'";
+		$sql = "SELECT * FROM users WHERE username='$username'";
 		$result = mysqli_query($conn, $sql);
 		if (!$result->num_rows > 0) {
 			$sql = "INSERT INTO users (username, firstname, lastname, contactnum, email, password, role)
@@ -43,7 +43,7 @@ if (isset($_POST['submit'])) {
                 $_SESSION['status2'] = "Something went wrong";
 			}
 		} else {
-			$_SESSION['status2'] = "Email already exists";
+			$_SESSION['status2'] = "Username already exists";
 		}
 		
 	} else {
