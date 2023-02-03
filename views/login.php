@@ -22,6 +22,7 @@ if (isset($_POST['submit'])) {
         $_SESSION['userID'] = $row['id'];
 		$_SESSION['username'] = $row['firstname'] . ' ' . $row['lastname'];
         $_SESSION['userRole'] = $row['role'];
+        $_SESSION['userEmail'] = $row['email'];
 		header("Location: ../index.php");
 	} else {
         $_SESSION['status2'] = "Incorrect username or password";

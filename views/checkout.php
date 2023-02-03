@@ -5,6 +5,7 @@ session_start();
 require_once ("../php/order_operation.php");
 require_once ('getdatabase.php');
 require_once ('component.php');
+include 'sendconfirm.php';
 
 $db = new CreateDb("mandatech", "products");
 
