@@ -125,7 +125,7 @@ $db = new CreateDb("mandatech", "products");
       $price = strval($total);
     
       createData($_SESSION['userID'], $_SESSION['username'], $_POST['badd'], $_POST['sadd'], $products, $price);
-    } else {
+    } elseif(isset($_SESSION['checkoutButton'])) {
       echo 'Error';
     }
     ?>
