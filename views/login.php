@@ -15,21 +15,14 @@ if (isset($_POST['submit'])) {
 	$role = $_POST['role'];
 	$password = md5($_POST['password']);
 
-	$sql = "SELECT * FROM users WHERE username='$username' AND password='$password' AND role = '$role'" ;
+	$sql = "SELECT * FROM users WHERE username='$username' AND password='$password'" ;
 	$result = mysqli_query($conn, $sql);
 	if ($result->num_rows > 0) {
-		switch($role){
-		case 1:
-		$row = mysqli_fetch_assoc($result);
-		$_SESSION['username'] = $row['username'];
-		header("Location: admin.php");
-		break;
-		case 2:
-		$row = mysqli_fetch_assoc($result);
-		$_SESSION['username'] = $row['username'];
-		header("Location: user.php");
-		break;
-	}
+        $row = mysqli_fetch_assoc($result);
+        $_SESSION['userID'] = $row['id'];
+		$_SESSION['username'] = $row['firstname'] . ' ' . $row['lastname'];
+        $_SESSION['userRole'] = $row['role'];
+		header("Location: ../index.php");
 	} else {
         $_SESSION['status2'] = "Incorrect username or password";
 	}
@@ -86,7 +79,7 @@ if (isset($_POST['submit'])) {
                                                 <label class="small mb-1" for="inputPassword">Password</label>
                                                 <input class="form-control" id="inputPassword" type="password" placeholder="Enter password" name="password" value="<?php echo $_POST['password']; ?>" required>
                                             </div>
-                                            <!-- form group (role)-->
+                                            <!-- form group (role)
                                             <div class="mb-3">
                                             <label for="exampleFormControlSelect1">Role</label>
                                             <select class="form-control" name="role" id="exampleFormControlSelect1">
@@ -94,7 +87,7 @@ if (isset($_POST['submit'])) {
                                                 <option value="1">Admin</option>
                                                 <option value="2">User</option>
                                             </select>
-                                            </div>
+                                            </div> -->
                                             <!-- Form Group (login box)-->
                                             <div class="d-flex align-items-center float-end">
                                                 <button class="btn btn-dark" name="submit">Login</button>

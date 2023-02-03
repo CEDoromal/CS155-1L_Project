@@ -8,6 +8,10 @@ if (!isset($_SESSION['username'])) {
 
 ?>
 
+<?php
+    require_once ('navbar.php');
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -23,18 +27,7 @@ if (!isset($_SESSION['username'])) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/feather-icons/4.28.0/feather.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="nav-fixed" style="background-color: #111B4A;">
-        <nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
-
-            <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="../index.php">MANDATECH</a>
-            <!-- Navbar Items-->
-            <ul class="navbar-nav align-items-center ms-auto">
-            <li class="nav-item no-caret d-none d-md-block me-3">
-            <a class="nav-link active" href="../index.php">
-                        <div class="fw-500">Home</div>
-            </a>
-            </li>
-            </ul>
-        </nav>
+    <?php getNavBar(); ?>
         <main>
             <!-- Main page content-->
             <br><br>

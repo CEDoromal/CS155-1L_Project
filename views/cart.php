@@ -22,6 +22,10 @@ if (isset($_POST['remove'])){
 
 ?>
 
+<?php
+    require_once ('navbar.php');
+?>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -40,65 +44,7 @@ if (isset($_POST['remove'])){
     <link href="../css/styles.css" rel="stylesheet" />
 </head>
 <body class="bg-light">
-<nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
-
-           <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="/mandatech/index.php">MANDATECH</a>
-           <!-- Navbar Items-->
-           <ul class="navbar-nav align-items-center ms-auto">
-           <li class="nav-item no-caret d-none d-md-block me-3">
-           <a class="nav-link" href="../index.php">
-                       <div class="fw-500">Home</div>
-           </a>
-            </li>
-           <li class="nav-item dropdown ">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Products
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="../views/productsmonitor.php">Monitors</a>
-          <a class="dropdown-item" href="../views/productsmkb.php">Mice & Keyboards</a>
-          <a class="dropdown-item" href="../views/productshm.php">Headsets & Microphones</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="../views/products.php">All Products</a>
-        </div>
-      </li>
-           <li class="nav-item no-caret d-none d-md-block me-3">
-           <a class="nav-link" href="../views/about.php">
-                       <div class="fw-500">About</div>
-           </a>
-           </li>
-           <li class="nav-item no-caret d-none d-md-block me-3">
-           <a class="nav-link" href="../views/contact.php">
-                       <div class="fw-500">Contact Us</div>
-           </a>
-           </li>
-           <li class="nav-item no-caret d-none d-md-block me-3">
-           <a class="btn btn-dark btn-sm" type="button" href="../views/login.php">Login</a>
-           </li>
-           <li>
-           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="mr-auto"></div>
-            <div class="navbar-nav">
-                <a href="../views/cart.php" class="nav-item nav-link active">
-                    <h5 class="px-5 cart">
-                        <i class="fas fa-shopping-cart"></i> Cart
-                        <?php
-
-                        if (isset($_SESSION['shoppingCart'])){
-                            $count = count($_SESSION['shoppingCart']);
-                            echo "<span id=\"cart_count\" class=\"text-warning bg-light\">$count</span>";
-                        }else{
-                            echo "<span id=\"cart_count\" class=\"text-warning bg-light\">0</span>";
-                        }
-
-                        ?>
-                    </h5>
-                </a>
-            </div>
-        </div>
-            </li>
-           </ul>
-       </nav>
+<?php getNavBar(); ?>
 
 <div class="container-fluid">
     <div class="row px-5">
@@ -156,7 +102,13 @@ if (isset($_POST['remove'])){
                         <h6>PHP <?php
                             echo $total;
                             ?></h6>
-                                          <a href="checkout.php" class="btn btn-info"><i class="far fa-credit-card"></i>&nbsp;&nbsp;Checkout</a>
+                            <?php
+                                if(isset($_SESSION['shoppingCart']) && count($_SESSION['shoppingCart']) > 0) {
+                                    echo '<a href="checkout.php" class="btn btn-info"><i class="far fa-credit-card"></i>&nbsp;&nbsp;Checkout</a>';
+                                } else {
+                                    echo '<a class="btn btn-info disabled"><i class="far fa-credit-card"></i>&nbsp;&nbsp;Checkout</a>';
+                                }
+                            ?>
                     </div>
                 </div>
             </div>

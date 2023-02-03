@@ -5,7 +5,7 @@ if (!isset($_SESSION['username'])) {
     header("Location: ../index.php");
 }
 require_once ("../php/component.php");
-require_once ("../php/operation.php");
+require_once ("../php/order_operation.php");
 ?>
 
 <?php
@@ -19,7 +19,7 @@ require_once ("../php/operation.php");
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>ADMIN - Products</title>
+    <title>ORDERS</title>
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -32,7 +32,7 @@ require_once ("../php/operation.php");
 </head>
 <br><br><br>
 <body class="nav-fixed" style="background-color: #111B4A;">
-    <?php getNavBar(); ?>
+<?php getNavBar(); ?>
 <main>
     <div class="container text-center">
         <h1 class="py-4 bg-dark text-light rounded">
@@ -50,28 +50,11 @@ require_once ("../php/operation.php");
                 <div class="pt-2">
                     <?php inputElement("<i class='fas fa-id-badge'></i>","ID", "id",setID()); ?>
                 </div>
-                <div class="pt-2">
-                    <?php inputElement("<i class='fas fa-book'></i>","Product Name", "name",""); ?>
-                </div>
-                <div class="pt-2">
-                    <?php inputElement("<i class='fas fa-book'></i>","Type", "type",""); ?>
-                </div>
-                <div class="pt-2">
-                    <?php inputElement("<i class='fas fa-book'></i>","Description", "dsc",""); ?>
-                </div>
-                <div class="row pt-2">
-                    <div class="col">
-                        <?php inputElement("<i class='fas fa-dollar-sign'></i>","Price", "price",""); ?>
-                    </div>
-                    <div class="col">
-                        <?php inputElement("<i class='fas fa-people-carry'></i>","Quantity", "quantity",""); ?>
-                    </div>
-                </div>
-                <div class="pt-2">
-                    <?php inputElement("<i class='fas fa-book'></i>","Image Reference", "img",""); ?>
+				<div class="pt-2">
+                    <?php inputElement("<i class='fas fa-people-carry'></i>","Status", "status",""); ?>
                 </div>
                 <div class="d-flex justify-content-center">
-                        <?php buttonElement("btn-create","btn btn-success","<i class='fas fa-plus'></i>","create","data-toggle='tooltip' data-placement='bottom' title='Create'"); ?>
+                        
                         <?php buttonElement("btn-read","btn btn-primary","<i class='fas fa-sync'></i>","read","data-toggle='tooltip' data-placement='bottom' title='Read'"); ?>
                         <?php buttonElement("btn-update","btn btn-light border","<i class='fas fa-pen-alt'></i>","update","data-toggle='tooltip' data-placement='bottom' title='Update'"); ?>
                         <?php buttonElement("btn-delete","btn btn-danger","<i class='fas fa-trash-alt'></i>","delete","data-toggle='tooltip' data-placement='bottom' title='Delete'"); ?>
@@ -86,11 +69,13 @@ require_once ("../php/operation.php");
                 <thead class="thead-dark">
                     <tr>
                         <th>ID</th>
-                        <th>Name</th>
-                        <th>Type</th>
-                        <th>Description</th>
+                        <th>User ID</th>
+						<th>User Name</th>
+                        <th>Billing Address</th>
+                        <th>Shipping Address</th>
+                        <th>Products</th>
                         <th>Price</th>
-                        <th>Quantity</th>
+						<th>Status</th>
                         <th>Edit</th>
                     </tr>
                 </thead>
@@ -107,12 +92,13 @@ require_once ("../php/operation.php");
 
                                <tr>
                                    <td data-id="<?php echo $row['id']; ?>"><?php echo $row['id']; ?></td>
-                                   <td data-id="<?php echo $row['id']; ?>"><?php echo $row['name']; ?></td>
-                                   <td data-id="<?php echo $row['id']; ?>"><?php echo $row['type']; ?></td>
-                                   <td data-id="<?php echo $row['id']; ?>"><?php echo $row['dsc']; ?></td>
+                                   <td data-id="<?php echo $row['id']; ?>"><?php echo $row['user_id']; ?></td>
+								   <td data-id="<?php echo $row['id']; ?>"><?php echo $row['user_name']; ?></td>
+                                   <td data-id="<?php echo $row['id']; ?>"><?php echo $row['bill_add']; ?></td>
+                                   <td data-id="<?php echo $row['id']; ?>"><?php echo $row['ship_add']; ?></td>
+                                   <td data-id="<?php echo $row['id']; ?>"><?php echo $row['products']; ?></td>
                                    <td data-id="<?php echo $row['id']; ?>"><?php echo $row['price']; ?></td>
-                                   <td data-id="<?php echo $row['id']; ?>"><?php echo $row['quantity']; ?></td>
-                                   <td data-id="<?php echo $row['id']; ?>"><?php echo $row['img']; ?></td>
+                                   <td data-id="<?php echo $row['id']; ?>"><?php echo $row['status']; ?></td>
                                    <td><i class="fas fa-edit btnedit" data-id="<?php echo $row['id']; ?>"></i></td>
                                </tr>
 

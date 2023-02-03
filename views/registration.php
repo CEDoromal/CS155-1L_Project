@@ -19,7 +19,8 @@ if (isset($_POST['submit'])) {
 	$password = md5($_POST['password']);
 	$cpassword = md5($_POST['cpassword']);
 
-	$role = $_POST['role'];
+	//$role = $_POST['role'];
+    $role = '2';
 
 	if ($password == $cpassword) {
 		$sql = "SELECT * FROM users WHERE email='$email'";
@@ -153,7 +154,7 @@ if (isset($_POST['submit'])) {
                                                     </div>
                                                 </div>
                                             </div>
-                                            <!-- form group (role)-->
+                                            <!-- form group (role)
                                             <div class="mb-3">
                                             <label for="exampleFormControlSelect1">Role</label>
                                             <select class="form-control" name="role" id="exampleFormControlSelect1">
@@ -161,7 +162,7 @@ if (isset($_POST['submit'])) {
                                                 <option value="1">Admin</option>
                                                 <option value="2">User</option>
                                             </select>
-                                            </div>
+                                            </div> -->
                                             <!-- Form Group (create account submit)-->
                                             <button class="btn btn-dark btn-block float-end" name="submit">Create Account</button>
                                         </form>

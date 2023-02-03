@@ -2,11 +2,16 @@
 
 session_start();
 
+require_once ("../php/order_operation.php");
 require_once ('getdatabase.php');
 require_once ('component.php');
 
 $db = new CreateDb("mandatech", "products");
 
+?>
+
+<?php
+    require_once ('navbar.php');
 ?>
 
 <!doctype html>
@@ -27,65 +32,7 @@ $db = new CreateDb("mandatech", "products");
     <link href="../css/styles.css" rel="stylesheet" />
 </head>
 <body class="bg-light">
-<nav class="topnav navbar navbar-expand shadow justify-content-between justify-content-sm-start navbar-light bg-white" id="sidenavAccordion">
-
-           <a class="navbar-brand pe-3 ps-4 ps-lg-2" href="/mandatech/index.php">MANDATECH</a>
-           <!-- Navbar Items-->
-           <ul class="navbar-nav align-items-center ms-auto">
-           <li class="nav-item no-caret d-none d-md-block me-3">
-           <a class="nav-link" href="/mandatech/index.php">
-                       <div class="fw-500">Home</div>
-           </a>
-            </li>
-           <li class="nav-item dropdown ">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Products
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item" href="../views/productsmonitor.php">Monitors</a>
-          <a class="dropdown-item" href="../views/productsmkb.php">Mice & Keyboards</a>
-          <a class="dropdown-item" href="../views/productshm.php">Headsets & Microphones</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="../views/products.php">All Products</a>
-        </div>
-      </li>
-           <li class="nav-item no-caret d-none d-md-block me-3">
-           <a class="nav-link" href="../views/about.php">
-                       <div class="fw-500">About</div>
-           </a>
-           </li>
-           <li class="nav-item no-caret d-none d-md-block me-3">
-           <a class="nav-link" href="../views/contact.php">
-                       <div class="fw-500">Contact Us</div>
-           </a>
-           </li>
-           <li class="nav-item no-caret d-none d-md-block me-3">
-           <a class="btn btn-dark btn-sm" type="button" href="views/login.php">Login</a>
-           </li>
-           <li>
-           <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="mr-auto"></div>
-            <div class="navbar-nav">
-                <a href="../views/cart.php" class="nav-item nav-link active">
-                    <h5 class="px-5 cart">
-                        <i class="fas fa-shopping-cart"></i> Cart
-                        <?php
-
-                        if (isset($_SESSION['shoppingCart'])){
-                            $count = count($_SESSION['shoppingCart']);
-                            echo "<span id=\"cart_count\" class=\"text-warning bg-light\">$count</span>";
-                        }else{
-                            echo "<span id=\"cart_count\" class=\"text-warning bg-light\">0</span>";
-                        }
-
-                        ?>
-                    </h5>
-                </a>
-            </div>
-        </div>
-            </li>
-           </ul>
-       </nav>
+<?php getNavBar(); ?>
 
 <div class="container-fluid">
     <div class="row px-5">
@@ -93,19 +40,20 @@ $db = new CreateDb("mandatech", "products");
             <div class="shopping-cart">
             <h6>Billing Details</h6>
                 <hr>
-                <form>
+                <form method="post">
   <div class="form-group row">
     <label for="inputEmail3" class="col-sm-2 col-form-label">Billing address</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="BIlling Address">
+      <input type="text" name="badd" class="form-control" placeholder="BIlling Address" required>
     </div>
   </div>
   <div class="form-group row">
     <label for="inputPassword3" class="col-sm-2 col-form-label">Shipping Address</label>
     <div class="col-sm-10">
-      <input type="text" class="form-control" placeholder="Shipping Address">
+      <input type="text" name="sadd" class="form-control" placeholder="Shipping Address" required>
     </div>
   </div>
+  <!--
   <fieldset class="form-group">
     <div class="row">
       <legend class="col-form-label col-sm-2 pt-0">Payment Methods</legend>
@@ -137,6 +85,7 @@ $db = new CreateDb("mandatech", "products");
       </div>
     </div>
   </fieldset>
+  -->
   <div class="form-group row">
     <div class="col-sm-2"></div>
     <div class="col-sm-10">
@@ -150,12 +99,39 @@ $db = new CreateDb("mandatech", "products");
   </div>
   <div class="form-group row">
     <div class="col-sm-10">
-    <a href="../index.php" class="btn btn-info" onclick="alert('Order Recieved! Check your email for confirmation.')">&nbsp;Checkout</a>
+    <input type="submit" name="checkoutButton" class="btn btn-info" value="Checkout">
     </div>
   </div>
 </form>
-            </div>
-        </div>
+<span>
+  <?php
+    echo '';
+    if(isset($_SESSION['shoppingCart']) && isset($_POST['checkoutButton']) && isset($_POST['badd']) && isset($_POST['sadd']) && isset($_SESSION['shoppingCart']) && isset($_SESSION['username']) && isset($_SESSION['userID'])) {  
+      $total = 0;
+      $products = '';    
+      
+      $product_id = array_column($_SESSION['shoppingCart'], 'id');
+    
+      $result = $db->getDataAllProducts();
+      while ($row = mysqli_fetch_assoc($result)){
+          foreach ($product_id as $id){
+              if ($row['id'] == $id){
+                  $total = $total + (int)$row['price'];
+                  $products = $products . ', ' . $row['name'];
+              }
+          }
+      }
+    
+      $price = strval($total);
+    
+      createData($_SESSION['userID'], $_SESSION['username'], $_POST['badd'], $_POST['sadd'], $products, $price);
+    } else {
+      echo 'Error';
+    }
+    ?>
+</span>
+</div>
+</div>
         <div class="col-md-4 offset-md-1 border rounded mt-5 bg-white h-25">
 
             <div class="pt-4">

@@ -1,3 +1,9 @@
+drop schema if exists mandatech;
+create schema mandatech;
+use mandatech;
+
+
+
 -- phpMyAdmin SQL Dump
 -- version 5.1.1
 -- https://www.phpmyadmin.net/
@@ -24,7 +30,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users` and `products`
+-- Table structure for table `users` and `products` and `orders`
 --
 
 CREATE TABLE IF NOT EXISTS `users` (
@@ -46,6 +52,18 @@ CREATE TABLE  IF NOT EXISTS `products` (
 	`price` decimal(7,2) NOT NULL,
 	`quantity` int(11) NOT NULL,
 	`img` text NOT NULL,
+	PRIMARY KEY (`id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+CREATE TABLE  IF NOT EXISTS `orders` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+	`user_id` varchar(200) NOT NULL,
+	`user_name` varchar(100) NOT NULL,
+	`bill_add` varchar(100) NOT NULL,
+	`ship_add` varchar(100) NOT NULL,
+	`products` text NOT NULL,
+	`price` decimal(7,2) NOT NULL,
+	`status` varchar(100) NOT NULL,
 	PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
